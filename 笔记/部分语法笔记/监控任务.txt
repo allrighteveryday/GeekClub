@@ -1,0 +1,20 @@
+监视任务
+1.描述：
+系统监视任务$monitor，在仿真测试脚本中可以实现对任何变量或表达式取值的监视和显示
+$monitor 语法结构以用法都与$display 类似。
+当$monitor 任务中包含一个或多个监控信号并运行时，若参数列表中有任何的变量或表达式的值发生变化，所有参数列表中的信号值都将输出并显示。
+同一时刻，若两个或多个参数的值同时发生变化，则此时将会合并一次输出并显示。
+$monitor 任务在申明后默认开启，在其运行期间，若调用系统任务$monitoroff 则将会关闭$monitor，直到调用系统任务$monitoron 后将重新开启$monitor。
+2.例子
+initial begin
+	@(posedge rst_n);
+	$monitor("o_cnt is %d at %0dns", o_cnt, $time);
+end
+
+always@(posedge clk)begin
+	if(o_cnt == 4'd5) $monitoroff
+	else if(o_cnt == 4'd12) $monitoron
+end
+
+该实例监控4位计数器o_cnt，将其值与时间戳一起输出显示。
+同时在o_cnt 取值为5 时调用系统任务$monitoroff 关闭监控，在o_cnt 取值为12时调用系统任务$monitoron 重新开启监控。

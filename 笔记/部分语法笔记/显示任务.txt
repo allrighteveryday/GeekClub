@@ -1,0 +1,23 @@
+显示任务
+一.$display与$write
+1.任务名：
+
+$display		$write		以十进制形式输出
+$displayb		$writeb		以二进制形式输出
+$displayo		$writeo		以八进制形式输出
+$displayh		$writeh		以十六进制形式输出
+2.格式：
+
+  任务名 ("【可选字符串】【格式】",【信号一】,【信号二】,.......)
+
+3.例子：
+  输出显示的数值所占字符个数由输出信号的数值类型和位宽决定。
+除了十进制显示时，高位的0会默认以空格填充，其他进制显示时
+会将高位的0显示出来
+
+  $display("rval = %h hex %d decimal", rval, rval)
+输出：rval = 00000065hex       101decimal
+
+  $display("rval = %0h hex %0d decimal", rval, rval)
+输出：rval = 65hex 101decimal
+顶格输出
